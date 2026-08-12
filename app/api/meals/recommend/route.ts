@@ -24,7 +24,8 @@ export async function POST(request: NextRequest) {
   let body: unknown;
   try {
     body = await request.json();
-  } catch {
+  } catch (error) {
+    console.error("[api/meals/recommend] invalid JSON body", error);
     return NextResponse.json(
       { error: "Invalid JSON body" },
       { status: 400 }
@@ -38,41 +39,50 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { ingredients, dietTags } = body;
+  try {
+    const { ingredients, dietTags } = body;
+    const normalizedIngredients = Array.from(new Set(ingredients.map((item) => item.trim()))).filter(Boolean);
 
-  const recipes = await prisma.recipe.findMany({
-    where: dietTags?.length
-      ? { dietTags: { some: { dietTag: { name: { in: dietTags } } } } }
-      : undefined,
-    include: {
-      ingredients: { include: { ingredient: true } },
-      dietTags: { include: { dietTag: true } },
-    },
-  });
+    const recipes = await prisma.recipe.findMany({
+      where: dietTags?.length
+        ? { dietTags: { some: { dietTag: { name: { in: dietTags } } } } }
+        : undefined,
+      include: {
+        ingredients: { include: { ingredient: true } },
+        dietTags: { include: { dietTag: true } },
+      },
+    });
 
-  const recipeInputs: RecipeInput[] = recipes.map((r) => ({
-    id: String(r.id),
-    name: r.name,
-    requiredIngredients: r.ingredients
-      .filter((ri) => ri.required)
-      .map((ri) => ri.ingredient.name),
-    calories: r.calories,
-    prepTime: r.prepTime,
-    healthyScore: Math.round((1 - r.calories / 1000) * 10),
-    difficulty: r.difficulty,
-  }));
+    const recipeInputs: RecipeInput[] = recipes.map((r) => ({
+      id: String(r.id),
+      name: r.name,
+      requiredIngredients: r.ingredients
+        .filter((ri) => ri.required)
+        .map((ri) => ri.ingredient.name),
+      calories: r.calories,
+      prepTime: r.prepTime,
+      healthyScore: Math.round((1 - r.calories / 1000) * 10),
+      difficulty: r.difficulty,
+    }));
 
-  const results = matchRecipes(recipeInputs, ingredients);
+    const results = matchRecipes(recipeInputs, normalizedIngredients);
 
-  return NextResponse.json({
-    results: results.map((m) => ({
-      id: m.recipe.id,
-      name: m.recipe.name,
-      matchPercentage: m.matchPercentage,
-      missingIngredients: m.missingIngredients,
-      calories: m.recipe.calories,
-      prepTime: m.recipe.prepTime,
-      difficulty: m.recipe.difficulty,
-    })),
-  });
+    return NextResponse.json({
+      results: results.map((m) => ({
+        id: m.recipe.id,
+        name: m.recipe.name,
+        matchPercentage: m.matchPercentage,
+        missingIngredients: m.missingIngredients,
+        calories: m.recipe.calories,
+        prepTime: m.recipe.prepTime,
+        difficulty: m.recipe.difficulty,
+      })),
+    });
+  } catch (error) {
+    console.error("[api/meals/recommend] failed to generate recommendations", error);
+    return NextResponse.json(
+      { error: "Unable to generate meal recommendations" },
+      { status: 500 }
+    );
+  }
 }

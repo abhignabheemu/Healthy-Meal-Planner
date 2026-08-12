@@ -152,10 +152,7 @@ export function IngredientSelector({
 
   return (
     <div className="w-full max-w-2xl">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-800">
-          Select Ingredients
-        </h2>
+      <div className="mb-4 flex items-center justify-end">
         {selected.length > 0 && (
           <button
             onClick={clearAll}
