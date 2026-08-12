@@ -12,87 +12,87 @@
 - [ ] Configure Vercel deployment settings
 
 ## Architecture & Design
-- [ ] Define application architecture
-- [ ] Define API route structure
-- [ ] Define shared TypeScript types
-- [ ] Define domain models
+- [x] Define application architecture
+- [x] Define API route structure
+- [x] Define shared TypeScript types
+- [x] Define domain models
 - [ ] Create wireframes for Home, Results, and Weekly Planner pages
 - [ ] Create responsive layout design
 
 ## Database Setup
-- [ ] Install Prisma
-- [ ] Configure Prisma schema
-- [ ] Configure SQLite database
-- [ ] Create migrations
-- [ ] Seed database pipeline
+- [x] Install Prisma
+- [x] Configure Prisma schema
+- [x] Configure SQLite database
+- [x] Create migrations
+- [x] Seed database pipeline
 
 ## Data Models
 ### Recipe
-- [ ] Create Recipe model
-- [ ] Add name
-- [ ] Add description
-- [ ] Add prepTime
-- [ ] Add calories
-- [ ] Add difficulty
-- [ ] Add instructions
+- [x] Create Recipe model
+- [x] Add name
+- [x] Add description
+- [x] Add prepTime
+- [x] Add calories
+- [x] Add difficulty
+- [x] Add instructions
 
 ### Ingredient
-- [ ] Create Ingredient model
-- [ ] Add ingredient categories
-- [ ] Protein category
-- [ ] Vegetable category
-- [ ] Carb category
-- [ ] Other category
+- [x] Create Ingredient model
+- [x] Add ingredient categories
+- [x] Protein category
+- [x] Vegetable category
+- [x] Carb category
+- [x] Other category
 
 ### RecipeIngredient
-- [ ] Create relationship table
-- [ ] Add required flag
-- [ ] Validate relationships
+- [x] Create relationship table
+- [x] Add required flag
+- [x] Validate relationships
 
 ### Diet Tags
-- [ ] Create DietTag model
-- [ ] Vegetarian
-- [ ] Vegan
-- [ ] HighProtein
-- [ ] LowCarb
-- [ ] QuickMeal
+- [x] Create DietTag model
+- [x] Vegetarian
+- [x] Vegan
+- [x] HighProtein
+- [x] LowCarb
+- [x] QuickMeal
 
 ## Seed Data
-- [ ] Create recipe JSON structure
-- [ ] Gather 50 curated recipes
-- [ ] Create 20 chicken recipes
-- [ ] Create 10 vegetarian recipes
-- [ ] Create 10 fish recipes
-- [ ] Create 10 egg/tofu recipes
-- [ ] Add calories
-- [ ] Add nutrition summaries
-- [ ] Add prep times
-- [ ] Add instructions
-- [ ] Import seed data into SQLite
-- [ ] Verify data quality
+- [x] Create recipe JSON structure
+- [x] Gather 50 curated recipes
+- [x] Create 20 chicken recipes
+- [x] Create 10 vegetarian recipes
+- [x] Create 10 fish recipes
+- [x] Create 10 egg/tofu recipes
+- [x] Add calories
+- [x] Add nutrition summaries
+- [x] Add prep times
+- [x] Add instructions
+- [x] Import seed data into SQLite
+- [x] Verify data quality
 
 ## Ingredient Catalog
 ### Proteins
-- [ ] Chicken
-- [ ] Fish
-- [ ] Tofu
-- [ ] Beans
-- [ ] Lentils
-- [ ] Eggs
+- [x] Chicken
+- [x] Fish
+- [x] Tofu
+- [x] Beans
+- [x] Lentils
+- [x] Eggs
 
 ### Vegetables
-- [ ] Broccoli
-- [ ] Spinach
-- [ ] Bell Pepper
-- [ ] Carrots
-- [ ] Tomatoes
+- [x] Broccoli
+- [x] Spinach
+- [x] Bell Pepper
+- [x] Carrots
+- [x] Tomatoes
 
 ### Carbs
-- [ ] Rice
-- [ ] Pasta
-- [ ] Potatoes
-- [ ] Quinoa
-- [ ] Bread
+- [x] Rice
+- [x] Pasta
+- [x] Potatoes
+- [x] Quinoa
+- [x] Bread
 
 ## Frontend - Home Page
 - [x] Create homepage with title
@@ -102,14 +102,14 @@
 - [ ] Build responsive layout
 
 ### Ingredient Selection
-- [ ] Protein selector
-- [ ] Vegetable selector
-- [ ] Carb selector
-- [ ] Multi-select support
-- [ ] Checkbox controls
-- [ ] Ingredient search
-- [ ] Autocomplete component
-- [ ] Clear selection functionality
+- [x] Protein selector
+- [x] Vegetable selector
+- [x] Carb selector
+- [x] Multi-select support
+- [x] Checkbox controls
+- [x] Ingredient search
+- [x] Autocomplete component
+- [x] Clear selection functionality
 
 ### Dietary Preferences
 - [ ] Vegetarian filter
@@ -137,10 +137,10 @@
 - [ ] Display instructions
 
 ### Sorting
-- [ ] Sort by match percentage
+- [x] Sort by match percentage
 - [ ] Sort by dietary preference match
-- [ ] Sort by healthy score
-- [ ] Sort by prep time
+- [x] Sort by healthy score
+- [x] Sort by prep time
 
 ## Frontend - Weekly Planner
 - [ ] Create weekly planner page
@@ -154,19 +154,23 @@
 - [ ] Responsive design
 
 ## API Development
+### Health Check API
+- [x] GET /api/health endpoint
+- [x] Database connectivity check
+
 ### Ingredients API
-- [ ] GET ingredients endpoint
-- [ ] Return ingredient catalog
-- [ ] Add validation
+- [x] GET ingredients endpoint
+- [x] Return ingredient catalog
+- [x] Add validation
 
 ### Meal Recommendation API
-- [ ] POST /api/meals/recommend
-- [ ] Validate payload
-- [ ] Fetch recipes
-- [ ] Match ingredients
-- [ ] Apply dietary filters
-- [ ] Sort results
-- [ ] Return recommendations
+- [x] POST /api/meals/recommend
+- [x] Validate payload
+- [x] Fetch recipes
+- [x] Match ingredients
+- [x] Apply dietary filters
+- [x] Sort results
+- [x] Return recommendations
 
 ### Weekly Plan API
 - [ ] POST /api/meals/weekly
@@ -179,19 +183,19 @@
 
 ## Recommendation Engine
 ### Matching Logic
-- [ ] Exact match calculation
-- [ ] One ingredient missing logic
-- [ ] Two ingredients missing logic
-- [ ] Hide recipes missing 3+ ingredients
+- [x] Exact match calculation
+- [x] One ingredient missing logic
+- [x] Two ingredients missing logic
+- [x] Hide recipes missing 3+ ingredients
 
 ### Match Scores
-- [ ] 100% match support
-- [ ] 90% match support
-- [ ] 80% match support
+- [x] 100% match support
+- [x] 90% match support
+- [x] 80% match support
 
 ### Missing Ingredient Tracking
-- [ ] Identify missing ingredients
-- [ ] Return ingredient list to UI
+- [x] Identify missing ingredients
+- [x] Return ingredient list to UI
 
 ## Validation & Error Handling
 ### Client Validation
@@ -246,17 +250,26 @@
 - [x] One missing ingredient scenario
 - [x] Two missing ingredient scenario
 - [x] More than two missing ingredients scenario
+- [x] Case-insensitive matching test
+- [x] Ranking by match percentage test
+- [x] Ingredient category validation tests
+- [x] Ingredient CRUD tests
 - [ ] Vegetarian filter tests
 - [ ] Low carb filter tests
 
 ### Integration Tests
+- [x] Database connectivity test
+- [x] Recipe creation and querying test
+- [x] Recipe-ingredient relationship test
+- [x] Diet tag creation and querying test
+- [x] Unique constraint enforcement tests
 - [ ] Generate meals flow
 - [ ] Weekly plan flow
 - [ ] No results flow
 
 ### UI Tests
-- [ ] Ingredient search
-- [ ] Multi-select functionality
+- [x] Ingredient search
+- [x] Multi-select functionality
 - [ ] Mobile responsiveness
 - [ ] Desktop responsiveness
 

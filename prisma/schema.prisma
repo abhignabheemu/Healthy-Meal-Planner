@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Recipe {
+  id           Int                @id @default(autoincrement())
+  name         String             @unique
+  description  String
+  prepTime     Int
+  calories     Int
+  difficulty   String
+  instructions String
+  ingredients  RecipeIngredient[]
+  dietTags     RecipeDietTag[]
+  createdAt    DateTime           @default(now())
+}
+
+model Ingredient {
+  id       Int                @id @default(autoincrement())
+  name     String             @unique
+  category String
+  recipes  RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id           Int        @id @default(autoincrement())
+  recipeId     Int
+  ingredientId Int
+  required     Boolean    @default(true)
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@unique([recipeId, ingredientId])
+}
+
+model DietTag {
+  id      Int             @id @default(autoincrement())
+  name    String          @unique
+  recipes RecipeDietTag[]
+}
+
+model RecipeDietTag {
+  id        Int     @id @default(autoincrement())
+  recipeId  Int
+  dietTagId Int
+  recipe    Recipe  @relation(fields: [recipeId], references: [id])
+  dietTag   DietTag @relation(fields: [dietTagId], references: [id])
+
+  @@unique([recipeId, dietTagId])
+}

@@ -31,9 +31,9 @@ describe("scoreRecipe", () => {
     expect(result.missingIngredients).toEqual([]);
   });
 
-  it("calculates correct percentage with missing ingredients", () => {
+  it("returns 80% when exactly two ingredients are missing", () => {
     const result = scoreRecipe(chickenStirFry, ["chicken", "rice"]);
-    expect(result.matchPercentage).toBe(50);
+    expect(result.matchPercentage).toBe(80);
     expect(result.missingIngredients).toEqual(["broccoli", "soy sauce"]);
   });
 

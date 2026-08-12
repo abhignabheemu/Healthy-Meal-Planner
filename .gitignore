@@ -4,4 +4,8 @@ node_modules/
 .env
 .env.local
 prisma/*.db
+*.db
 coverage/
+
+/lib/generated/prisma
+*.tsbuildinfo

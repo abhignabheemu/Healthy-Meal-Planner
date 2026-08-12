@@ -1,8 +1,11 @@
-export interface Recipe {
-  id: string;
-  name: string;
-  requiredIngredients: string[];
-}
+import {
+  scoreRecipe as _scoreRecipe,
+  matchRecipes,
+  type RecipeInput,
+  type MatchResult,
+} from "./matching";
+
+export type Recipe = Pick<RecipeInput, "id" | "name" | "requiredIngredients">;
 
 export interface ScoredRecipe {
   recipe: Recipe;
@@ -10,29 +13,29 @@ export interface ScoredRecipe {
   missingIngredients: string[];
 }
 
-export function scoreRecipe(
-  recipe: Recipe,
-  availableIngredients: string[]
-): ScoredRecipe {
-  const available = new Set(
-    availableIngredients.map((i) => i.toLowerCase().trim())
-  );
-  const missing = recipe.requiredIngredients.filter(
-    (ing) => !available.has(ing.toLowerCase().trim())
-  );
-  const total = recipe.requiredIngredients.length;
-  const matched = total - missing.length;
-  const matchPercentage = total === 0 ? 100 : Math.round((matched / total) * 100);
-
-  return { recipe, matchPercentage, missingIngredients: missing };
+export function scoreRecipe(recipe: Recipe, availableIngredients: string[]): ScoredRecipe {
+  const input: RecipeInput = {
+    ...recipe,
+    calories: 0,
+    prepTime: 0,
+    healthyScore: 0,
+    difficulty: "",
+  };
+  const result = _scoreRecipe(input, availableIngredients);
+  return { recipe, matchPercentage: result.matchPercentage, missingIngredients: result.missingIngredients };
 }
 
-export function rankRecipes(
-  recipes: Recipe[],
-  availableIngredients: string[]
-): ScoredRecipe[] {
-  return recipes
-    .map((r) => scoreRecipe(r, availableIngredients))
-    .filter((s) => s.missingIngredients.length < 3)
-    .sort((a, b) => b.matchPercentage - a.matchPercentage);
+export function rankRecipes(recipes: Recipe[], availableIngredients: string[]): ScoredRecipe[] {
+  const inputs: RecipeInput[] = recipes.map((r) => ({
+    ...r,
+    calories: 0,
+    prepTime: 0,
+    healthyScore: 0,
+    difficulty: "",
+  }));
+  return matchRecipes(inputs, availableIngredients).map((result) => ({
+    recipe: { id: result.recipe.id, name: result.recipe.name, requiredIngredients: result.recipe.requiredIngredients },
+    matchPercentage: result.matchPercentage,
+    missingIngredients: result.missingIngredients,
+  }));
 }
