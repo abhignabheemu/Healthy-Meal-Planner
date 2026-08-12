@@ -1,14 +1,14 @@
 # Healthy Meal Planner MVP - TODO.md
 
 ## Project Setup
-- [ ] Create Next.js 15 application
-- [ ] Configure TypeScript
-- [ ] Configure ESLint and Prettier
-- [ ] Install Tailwind CSS
-- [ ] Create project folder structure
+- [x] Create Next.js 15 application
+- [x] Configure TypeScript
+- [x] Configure ESLint and Prettier
+- [x] Install Tailwind CSS
+- [x] Create project folder structure
 - [ ] Configure environment variables (.env)
 - [ ] Create README.md
-- [ ] Configure Git repository
+- [x] Configure Git repository
 - [ ] Configure Vercel deployment settings
 
 ## Architecture & Design
@@ -95,6 +95,7 @@
 - [ ] Bread
 
 ## Frontend - Home Page
+- [x] Create homepage with title
 - [ ] Create hero section
 - [ ] Create ingredient selection section
 - [ ] Create dietary filter section
@@ -230,11 +231,21 @@
 - [ ] Future Application Insights documentation
 
 ## Testing
+### Test Infrastructure
+- [x] Configure Vitest with jsdom environment
+- [x] Configure React Testing Library
+- [x] Configure coverage support (v8 provider)
+- [x] Add `npm run test` script
+- [x] Add `npm run test:coverage` script (text, HTML, lcov reporters)
+
+### Smoke Tests
+- [x] Homepage rendering test (Vitest + React Testing Library)
+
 ### Unit Tests
-- [ ] Exact match scenario
-- [ ] One missing ingredient scenario
-- [ ] Two missing ingredient scenario
-- [ ] More than two missing ingredients scenario
+- [x] Exact match scenario
+- [x] One missing ingredient scenario
+- [x] Two missing ingredient scenario
+- [x] More than two missing ingredients scenario
 - [ ] Vegetarian filter tests
 - [ ] Low carb filter tests
 
